@@ -1,0 +1,282 @@
+load("@rules_rust//rust:defs.bzl", "rust_library")
+
+rust_library(
+    name = "adc_ctrl",
+    srcs = ["adc_ctrl.rs"],
+    visibility = ["//visibility:public"],
+    deps = ["@ureg//:ureg"],
+)
+
+rust_library(
+    name = "aes",
+    srcs = ["aes.rs"],
+    visibility = ["//visibility:public"],
+    deps = ["@ureg//:ureg"],
+)
+
+rust_library(
+    name = "alert_handler",
+    srcs = ["alert_handler.rs"],
+    visibility = ["//visibility:public"],
+    deps = ["@ureg//:ureg"],
+)
+
+rust_library(
+    name = "aon_timer",
+    srcs = ["aon_timer.rs"],
+    visibility = ["//visibility:public"],
+    deps = ["@ureg//:ureg"],
+)
+
+rust_library(
+    name = "ast",
+    srcs = ["ast.rs"],
+    visibility = ["//visibility:public"],
+    deps = ["@ureg//:ureg"],
+)
+
+rust_library(
+    name = "clkmgr",
+    srcs = ["clkmgr.rs"],
+    visibility = ["//visibility:public"],
+    deps = ["@ureg//:ureg"],
+)
+
+rust_library(
+    name = "csrng",
+    srcs = ["csrng.rs"],
+    visibility = ["//visibility:public"],
+    deps = ["@ureg//:ureg"],
+)
+
+rust_library(
+    name = "edn",
+    srcs = ["edn.rs"],
+    visibility = ["//visibility:public"],
+    deps = ["@ureg//:ureg"],
+)
+
+rust_library(
+    name = "entropy_src",
+    srcs = ["entropy_src.rs"],
+    visibility = ["//visibility:public"],
+    deps = ["@ureg//:ureg"],
+)
+
+rust_library(
+    name = "flash_ctrl_core",
+    srcs = ["flash_ctrl_core.rs"],
+    visibility = ["//visibility:public"],
+    deps = ["@ureg//:ureg"],
+)
+
+rust_library(
+    name = "flash_ctrl_mem",
+    srcs = ["flash_ctrl_mem.rs"],
+    visibility = ["//visibility:public"],
+    deps = ["@ureg//:ureg"],
+)
+
+rust_library(
+    name = "gpio",
+    srcs = ["gpio.rs"],
+    visibility = ["//visibility:public"],
+    deps = ["@ureg//:ureg"],
+)
+
+rust_library(
+    name = "hmac",
+    srcs = ["hmac.rs"],
+    visibility = ["//visibility:public"],
+    deps = ["@ureg//:ureg"],
+)
+
+rust_library(
+    name = "i2c",
+    srcs = ["i2c.rs"],
+    visibility = ["//visibility:public"],
+    deps = ["@ureg//:ureg"],
+)
+
+rust_library(
+    name = "keymgr",
+    srcs = ["keymgr.rs"],
+    visibility = ["//visibility:public"],
+    deps = ["@ureg//:ureg"],
+)
+
+rust_library(
+    name = "kmac",
+    srcs = ["kmac.rs"],
+    visibility = ["//visibility:public"],
+    deps = ["@ureg//:ureg"],
+)
+
+rust_library(
+    name = "lc_ctrl",
+    srcs = ["lc_ctrl.rs"],
+    visibility = ["//visibility:public"],
+    deps = ["@ureg//:ureg"],
+)
+
+rust_library(
+    name = "otbn",
+    srcs = ["otbn.rs"],
+    visibility = ["//visibility:public"],
+    deps = ["@ureg//:ureg"],
+)
+
+rust_library(
+    name = "otp_ctrl_core",
+    srcs = ["otp_ctrl_core.rs"],
+    visibility = ["//visibility:public"],
+    deps = ["@ureg//:ureg"],
+)
+
+rust_library(
+    name = "otp_ctrl_prim",
+    srcs = ["otp_ctrl_prim.rs"],
+    visibility = ["//visibility:public"],
+    deps = ["@ureg//:ureg"],
+)
+
+rust_library(
+    name = "pattgen",
+    srcs = ["pattgen.rs"],
+    visibility = ["//visibility:public"],
+    deps = ["@ureg//:ureg"],
+)
+
+rust_library(
+    name = "pinmux",
+    srcs = ["pinmux.rs"],
+    visibility = ["//visibility:public"],
+    deps = ["@ureg//:ureg"],
+)
+
+rust_library(
+    name = "pwm",
+    srcs = ["pwm.rs"],
+    visibility = ["//visibility:public"],
+    deps = ["@ureg//:ureg"],
+)
+
+rust_library(
+    name = "pwrmgr",
+    srcs = ["pwrmgr.rs"],
+    visibility = ["//visibility:public"],
+    deps = ["@ureg//:ureg"],
+)
+
+rust_library(
+    name = "rom_ctrl_regs",
+    srcs = ["rom_ctrl_regs.rs"],
+    visibility = ["//visibility:public"],
+    deps = ["@ureg//:ureg"],
+)
+
+rust_library(
+    name = "rom_ctrl_rom",
+    srcs = ["rom_ctrl_rom.rs"],
+    visibility = ["//visibility:public"],
+    deps = ["@ureg//:ureg"],
+)
+
+rust_library(
+    name = "rstmgr",
+    srcs = ["rstmgr.rs"],
+    visibility = ["//visibility:public"],
+    deps = ["@ureg//:ureg"],
+)
+
+rust_library(
+    name = "rv_core_ibex",
+    srcs = ["rv_core_ibex.rs"],
+    visibility = ["//visibility:public"],
+    deps = ["@ureg//:ureg"],
+)
+
+rust_library(
+    name = "rv_dm_mem",
+    srcs = ["rv_dm_mem.rs"],
+    visibility = ["//visibility:public"],
+    deps = ["@ureg//:ureg"],
+)
+
+rust_library(
+    name = "rv_dm_regs",
+    srcs = ["rv_dm_regs.rs"],
+    visibility = ["//visibility:public"],
+    deps = ["@ureg//:ureg"],
+)
+
+rust_library(
+    name = "rv_plic",
+    srcs = ["rv_plic.rs"],
+    visibility = ["//visibility:public"],
+    deps = ["@ureg//:ureg"],
+)
+
+rust_library(
+    name = "rv_timer",
+    srcs = ["rv_timer.rs"],
+    visibility = ["//visibility:public"],
+    deps = ["@ureg//:ureg"],
+)
+
+rust_library(
+    name = "sensor_ctrl",
+    srcs = ["sensor_ctrl.rs"],
+    visibility = ["//visibility:public"],
+    deps = ["@ureg//:ureg"],
+)
+
+rust_library(
+    name = "spi_device",
+    srcs = ["spi_device.rs"],
+    visibility = ["//visibility:public"],
+    deps = ["@ureg//:ureg"],
+)
+
+rust_library(
+    name = "spi_host",
+    srcs = ["spi_host.rs"],
+    visibility = ["//visibility:public"],
+    deps = ["@ureg//:ureg"],
+)
+
+rust_library(
+    name = "sram_ctrl_ram",
+    srcs = ["sram_ctrl_ram.rs"],
+    visibility = ["//visibility:public"],
+    deps = ["@ureg//:ureg"],
+)
+
+rust_library(
+    name = "sram_ctrl_regs",
+    srcs = ["sram_ctrl_regs.rs"],
+    visibility = ["//visibility:public"],
+    deps = ["@ureg//:ureg"],
+)
+
+rust_library(
+    name = "sysrst_ctrl",
+    srcs = ["sysrst_ctrl.rs"],
+    visibility = ["//visibility:public"],
+    deps = ["@ureg//:ureg"],
+)
+
+rust_library(
+    name = "uart",
+    srcs = ["uart.rs"],
+    visibility = ["//visibility:public"],
+    deps = ["@ureg//:ureg"],
+)
+
+rust_library(
+    name = "usbdev",
+    srcs = ["usbdev.rs"],
+    visibility = ["//visibility:public"],
+    deps = ["@ureg//:ureg"],
+)
+
