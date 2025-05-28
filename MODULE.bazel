@@ -1,14 +1,18 @@
 module(name = "opentitan-external-example")
 
-git_override(
+#git_override(
+#    module_name = "lowrisc_opentitan",
+#    commit = "1245cd783101d40c05c02eb7b18ea6236855f52c",
+#    remote = "https://github.com/cfrantz/opentitan",
+#)
+local_path_override(
     module_name = "lowrisc_opentitan",
-    commit = "7940112216880f7826ba614ae83b1c1f1db4998b",
-    remote = "https://github.com/korran/opentitan",
+    path = "/usr/local/google/home/cfrantz/opentitan/bzlmod",
 )
 bazel_dep(name = "lowrisc_opentitan")
 
 bazel_dep(name = "bazel_features", version = "1.23.0")
-bazel_dep(name = "rules_cc", version = "0.0.17")
+bazel_dep(name = "rules_cc", version = "0.1.1")
 
 single_version_override(
     module_name = "rules_rust",
@@ -18,8 +22,8 @@ single_version_override(
     ],
 )
 
-bazel_dep(name = "rules_rust", version = "0.56.0")
-bazel_dep(name = "platforms", version = "0.0.10")
+bazel_dep(name = "rules_rust", version = "0.59.2")
+bazel_dep(name = "platforms", version = "0.0.11")
 
 single_version_override(
     module_name = "rules_rust_bindgen",
@@ -29,7 +33,7 @@ single_version_override(
         "//:third_party/patches/rules_rust.bindgen_static_lib.patch",
     ],
 )
-bazel_dep(name = "rules_rust_bindgen", version = "0.56.0")
+bazel_dep(name = "rules_rust_bindgen", version = "0.59.2")
 bazel_dep(name = "toolchains_llvm", version = "1.2.0")
 
 rust = use_extension("@rules_rust//rust:extensions.bzl", "rust")
@@ -66,7 +70,7 @@ single_version_override(
     ],
 )
 
-bazel_dep(name = "rules_python", version = "0.40.0")
+bazel_dep(name = "rules_python", version = "1.2.0")
 python = use_extension("@rules_python//python/extensions:python.bzl", "python")
 python.toolchain(
     # Required because CI containers currently run as the `root` user.
@@ -74,8 +78,14 @@ python.toolchain(
     # See <https://github.com/bazelbuild/rules_python/pull/713>.
     ignore_root_user_error = True,
     is_default = True,
-    python_version = "3.9",
+    python_version = "3.10",
 )
 use_repo(python, "pythons_hub")
 register_toolchains("@pythons_hub//:all")
 
+git_override(
+    module_name = "ureg",
+    commit = "0c1848c8b6e8b07f75c973dcc0bbb56c0efad4f3",
+    remote = "https://github.com/chipsalliance/caliptra-ureg",
+)
+bazel_dep(name = "ureg")
