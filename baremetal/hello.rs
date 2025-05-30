@@ -18,24 +18,11 @@ pub fn not_main(console: &mut Console) {
 
     let mut hmac = Hmac::new();
     println!("got hmac");
-    let mut hasher = <Hmac as DigestInit<Sha2_384>>::init(&mut hmac, Sha2_384).expect("init");
+    let mut hasher = hmac.init(Sha2_256).expect("init");
     println!("got hasher");
     hasher.update(b"test").expect("update");
     println!("got updated");
     let result = hasher.finalize().expect("finalize");
-
-    /*
-    println!("Configure");
-    hmac.configure(Algorithm::Sha2_256);
-    hmac.start();
-    println!("update");
-    hmac.update(b"test");
-    println!("process");
-    hmac.process();
-    //println!("wait");
-    hmac.wait_for_done();
-    let result = hmac.digest::<8>();
-    */
     println!("The digest of 'test' is {:?}", result.as_bytes());
 
 }

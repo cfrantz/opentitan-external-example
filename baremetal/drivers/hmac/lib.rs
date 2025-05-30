@@ -36,10 +36,9 @@ impl ErrorType for ContextSha256<'_> {
 }
 
 impl DigestInit<Sha2_256> for Hmac {
-    type InitParams = Sha2_256;
     type OpContext<'a> = ContextSha256<'a>;
 
-    fn init<'a>(&'a mut self, _init_params: Self::InitParams) -> Result<Self::OpContext<'a>, Self::Error> {
+    fn init<'a>(&'a mut self, _init_params: Sha2_256) -> Result<Self::OpContext<'a>, Self::Error> {
         self.configure(Algorithm::Sha2_256);
         self.start();
         Ok(ContextSha256 {
@@ -75,10 +74,9 @@ impl ErrorType for ContextSha384<'_> {
 }
 
 impl DigestInit<Sha2_384> for Hmac {
-    type InitParams = Sha2_384;
     type OpContext<'a> = ContextSha384<'a>;
 
-    fn init<'a>(&'a mut self, _init_params: Self::InitParams) -> Result<Self::OpContext<'a>, Self::Error> {
+    fn init<'a>(&'a mut self, _init_params: Sha2_384) -> Result<Self::OpContext<'a>, Self::Error> {
         self.configure(Algorithm::Sha2_384);
         self.start();
         Ok(ContextSha384 {
@@ -114,10 +112,9 @@ impl ErrorType for ContextSha512<'_> {
 }
 
 impl DigestInit<Sha2_512> for Hmac {
-    type InitParams = Sha2_512;
     type OpContext<'a> = ContextSha512<'a>;
 
-    fn init<'a>(&'a mut self, _init_params: Self::InitParams) -> Result<Self::OpContext<'a>, Self::Error> {
+    fn init<'a>(&'a mut self, _init_params: Sha2_512) -> Result<Self::OpContext<'a>, Self::Error> {
         self.configure(Algorithm::Sha2_512);
         self.start();
         Ok(ContextSha512 {

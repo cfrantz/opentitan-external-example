@@ -95,7 +95,6 @@ pub trait ErrorType {
 
 
 pub trait DigestInit<T: DigestAlgorithm> : ErrorType {
-    type InitParams;
     type OpContext<'a>: DigestOp where Self: 'a;
 
     /// Init instance of the crypto function with the given context.
@@ -107,7 +106,7 @@ pub trait DigestInit<T: DigestAlgorithm> : ErrorType {
     /// # Returns
     ///
     /// A new instance of the hash function.
-    fn init<'a>(&'a mut self, init_params: Self::InitParams) -> Result<Self::OpContext<'a>, Self::Error>;
+    fn init<'a>(&'a mut self, init_params: T) -> Result<Self::OpContext<'a>, Self::Error>;
 }
 
 pub trait DigestCtrlReset: ErrorType {
