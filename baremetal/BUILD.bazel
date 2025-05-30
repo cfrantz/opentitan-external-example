@@ -22,7 +22,11 @@ ld_library(
 
 rust_binary(
     name = "hello",
-    srcs = ["hello.rs"],
+    srcs = [
+        "hello.rs",
+        "hmac_demo.rs",
+        "kmac_demo.rs",
+    ],
     visibility = ["//visibility:public"],
     deps = [
         ":layout",
@@ -30,6 +34,7 @@ rust_binary(
         "//baremetal/base",
         "//baremetal/drivers",
         "//baremetal/traits",
+        "//registers:kmac",
         "@crates_baremetal//:ufmt",
         "@crates_baremetal//:zerocopy",
     ],
