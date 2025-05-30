@@ -8,5 +8,6 @@ rust_library(
     ],
     deps = [
         "//baremetal/drivers/hmac",
+        "//baremetal/drivers/kmac",
     ],
 )
