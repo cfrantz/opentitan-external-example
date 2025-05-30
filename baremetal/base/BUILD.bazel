@@ -8,6 +8,7 @@ rust_library(
         "start.rs",
         "panic.rs",
         "console.rs",
+        "helper.rs",
     ],
     rustc_flags = [
         "-C", "llvm-args=-align-all-functions=2",
