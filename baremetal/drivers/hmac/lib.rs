@@ -5,7 +5,8 @@ use base::println;
 use ufmt;
 
 use driver::*;
-pub use driver::{Hmac, Algorithm};
+pub use driver::Hmac;
+use hmac::enums::DigestSize;
 
 use traits::digest::{
     Digest, DigestAlgorithm, ErrorKind, Error, ErrorType, DigestInit, DigestOp,
@@ -39,7 +40,7 @@ impl DigestInit<Sha2_256> for Hmac {
     type OpContext<'a> = ContextSha256<'a>;
 
     fn init<'a>(&'a mut self, _init_params: Sha2_256) -> Result<Self::OpContext<'a>, Self::Error> {
-        self.configure(Algorithm::Sha2_256);
+        self.configure(DigestSize::Sha2256);
         self.start();
         Ok(ContextSha256 {
             hw: self,
@@ -77,7 +78,7 @@ impl DigestInit<Sha2_384> for Hmac {
     type OpContext<'a> = ContextSha384<'a>;
 
     fn init<'a>(&'a mut self, _init_params: Sha2_384) -> Result<Self::OpContext<'a>, Self::Error> {
-        self.configure(Algorithm::Sha2_384);
+        self.configure(DigestSize::Sha2384);
         self.start();
         Ok(ContextSha384 {
             hw: self,
@@ -115,7 +116,7 @@ impl DigestInit<Sha2_512> for Hmac {
     type OpContext<'a> = ContextSha512<'a>;
 
     fn init<'a>(&'a mut self, _init_params: Sha2_512) -> Result<Self::OpContext<'a>, Self::Error> {
-        self.configure(Algorithm::Sha2_512);
+        self.configure(DigestSize::Sha2512);
         self.start();
         Ok(ContextSha512 {
             hw: self,

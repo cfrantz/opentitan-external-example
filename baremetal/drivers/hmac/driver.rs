@@ -1,25 +1,6 @@
 use hmac;
 use base::println;
 
-#[repr(u32)]
-#[derive(Clone, Copy, PartialEq, Eq)]
-pub enum Algorithm {
-    // These values correspond to the hardware bit patterns.
-    Sha2_256 = 1,
-    Sha2_384 = 2,
-    Sha2_512 = 4,
-}
-
-impl From<Algorithm> for hmac::enums::DigestSize {
-    fn from(a: Algorithm) -> Self {
-        match a {
-            Algorithm::Sha2_256 => hmac::enums::DigestSize::Sha2256,
-            Algorithm::Sha2_384 => hmac::enums::DigestSize::Sha2384,
-            Algorithm::Sha2_512 => hmac::enums::DigestSize::Sha2512,
-        }
-    }
-}
-
 pub struct HmacKey {
     pub key: [u32; 8],
 }
@@ -35,7 +16,7 @@ impl Hmac {
         }
     }
 
-    pub fn configure(&mut self, algorithm: Algorithm) {
+    pub fn configure(&mut self, digest_size: hmac::enums::DigestSize) {
 //        key: Option<&HmacKey>) {
         let regs = self.hmac.regs_mut();
 
@@ -48,7 +29,7 @@ impl Hmac {
                .endian_swap(false)
                .sha_en(true)
                .hmac_en(false)
-               .digest_size(|_| algorithm.into())
+               .digest_size(|_| digest_size)
                .key_length(|x| x.key_none())
         );
 
