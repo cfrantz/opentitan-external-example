@@ -1,0 +1,17 @@
+load("@rules_rust//rust:defs.bzl", "rust_library")
+package(default_visibility = ["//visibility:public"])
+
+rust_library(
+    name = "hmac",
+    srcs = [
+        "lib.rs",
+        "driver.rs",
+    ],
+    deps = [
+        "//registers:hmac",
+        "//baremetal/traits",
+        "//baremetal/base",
+        "@ureg//:ureg",
+        "@crates_baremetal//:ufmt",
+    ],
+)

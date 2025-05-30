@@ -1,0 +1,21 @@
+load("@rules_rust//rust:defs.bzl", "rust_library")
+package(default_visibility = ["//visibility:public"])
+
+rust_library(
+    name = "base",
+    srcs = [
+        "lib.rs",
+        "start.rs",
+        "panic.rs",
+        "console.rs",
+    ],
+    rustc_flags = [
+        "-C", "llvm-args=-align-all-functions=2",
+        #"-C", "panic=abort",
+    ],
+    deps = [
+        "//registers:uart",
+        "@ureg//:ureg",
+        "@crates_baremetal//:ufmt",
+    ],
+)

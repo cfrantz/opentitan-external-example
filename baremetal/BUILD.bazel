@@ -1,0 +1,56 @@
+load("@rules_rust//rust:defs.bzl", "rust_binary")
+load("@lowrisc_opentitan//rules:linker.bzl", "ld_library");
+load("@lowrisc_opentitan//rules:signing.bzl", "sign_bin");
+load("@lowrisc_opentitan//rules/opentitan:legacy.bzl", "obj_transform");
+load("@lowrisc_opentitan//rules:const.bzl", "CONST", "hex")
+load("@lowrisc_opentitan//rules:manifest.bzl", "manifest")
+
+package(default_visibility = ["//visibility:public"])
+
+cc_library(
+    name = "nostartfiles",
+    linkopts = [
+        "-nostartfiles",
+    ],
+)
+
+ld_library(
+    name = "layout",
+    script = "layout.ld",
+    non_page_aligned_segments = True,
+)
+
+rust_binary(
+    name = "hello",
+    srcs = ["hello.rs"],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":layout",
+        ":nostartfiles",
+        "//baremetal/base",
+        "//baremetal/drivers",
+        "//baremetal/traits",
+        "@crates_baremetal//:ufmt",
+        "@crates_baremetal//:zerocopy",
+    ],
+    #rustc_flags = [ "-C", "panic=abort" ],
+)
+
+obj_transform(
+    name = "hello_bin",
+    src = ":hello",
+)
+
+manifest({
+    "name": "manifest",
+    "identifier": hex(CONST.OWNER),
+})
+
+sign_bin(
+    name = "hello_signed",
+    bin = ":hello_bin",
+    ecdsa_key = {
+        "@lowrisc_opentitan//sw/device/silicon_creator/lib/ownership/keys/fake:app_prod_ecdsa": "prod",
+    },
+    manifest = ":manifest",
+)
