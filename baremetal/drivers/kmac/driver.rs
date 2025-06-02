@@ -117,7 +117,7 @@ impl Kmac {
         }
     }
 
-    pub fn squeeze<const N: usize>(mut self) -> Result<[u32; N], ()> {
+    pub fn squeeze<const N: usize>(&mut self) -> Result<[u32; N], ()> {
         let regs = self.kmac.regs_mut();
         Self::issue_command(regs, kmac::enums::Cmd::Process);
         Self::poll_status(regs, |status| status.sha3_squeeze()).expect("sqeeze0");
