@@ -9,26 +9,45 @@ pub struct Digest<const N: usize> {
 }
 
 pub trait DigestAlgorithm {
-    const OUTPUT_SIZE: usize;
+    const OUTPUT_BITS: usize;
     type Digest;
 }
 
 pub struct Sha2_256;
 impl DigestAlgorithm for Sha2_256 {
-    const OUTPUT_SIZE: usize = 8usize;
-    type Digest = Digest<8>;
+    const OUTPUT_BITS: usize = 256usize;
+    type Digest = Digest<{Self::OUTPUT_BITS / 32}>;
 }
-
 pub struct Sha2_384;
 impl DigestAlgorithm for Sha2_384 {
-    const OUTPUT_SIZE: usize = 12usize;
-    type Digest = Digest<12>;
+    const OUTPUT_BITS: usize = 384usize;
+    type Digest = Digest<{Self::OUTPUT_BITS / 32}>;
 }
-
 pub struct Sha2_512;
 impl DigestAlgorithm for Sha2_512 {
-    const OUTPUT_SIZE: usize = 16;
-    type Digest = Digest<16>;
+    const OUTPUT_BITS: usize = 512;
+    type Digest = Digest<{Self::OUTPUT_BITS / 32}>;
+}
+
+pub struct Sha3_224;
+impl DigestAlgorithm for Sha3_224 {
+    const OUTPUT_BITS: usize = 224usize;
+    type Digest = Digest<{Self::OUTPUT_BITS / 32}>;
+}
+pub struct Sha3_256;
+impl DigestAlgorithm for Sha3_256 {
+    const OUTPUT_BITS: usize = 256usize;
+    type Digest = Digest<{Self::OUTPUT_BITS / 32}>;
+}
+pub struct Sha3_384;
+impl DigestAlgorithm for Sha3_384 {
+    const OUTPUT_BITS: usize = 384usize;
+    type Digest = Digest<{Self::OUTPUT_BITS / 32}>;
+}
+pub struct Sha3_512;
+impl DigestAlgorithm for Sha3_512 {
+    const OUTPUT_BITS: usize = 512;
+    type Digest = Digest<{Self::OUTPUT_BITS / 32}>;
 }
 
 /// Error kind.
