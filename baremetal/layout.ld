@@ -1,6 +1,6 @@
 MEMORY
 {
-        flash (rx) : ORIGIN = 0x20010000, LENGTH = 0x10000
+        flash (rx) : ORIGIN = 0x20010000, LENGTH = 0x70000
         ram (!rx)  : ORIGIN = 0x10000000, LENGTH = 0x20000
 }
 
