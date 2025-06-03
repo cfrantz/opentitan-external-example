@@ -41,6 +41,7 @@ macro_rules! impl_sha2 {
     ($algo:ident, $digest_size:expr) => {
         impl DigestInit<$algo> for Hmac {
             type OpContext<'a> = Hasher<'a, $algo>;
+            type Output = <$algo as DigestAlgorithm>::Digest;
 
             fn init<'a>(&'a mut self, init_params: $algo) -> Result<Self::OpContext<'a>, Self::Error> {
                 self.configure($digest_size);

@@ -38,6 +38,7 @@ macro_rules! impl_sha3 {
     ($algo:ident, $strength:expr) => {
         impl DigestInit<$algo> for Kmac {
             type OpContext<'a> = Hasher<'a, $algo>;
+            type Output = <$algo as DigestAlgorithm>::Digest;
 
             fn init<'a>(&'a mut self, init_params: $algo) -> Result<Self::OpContext<'a>, Self::Error> {
                 self.configure(EntropyMode::SwMode, $strength, Mode::Sha3)

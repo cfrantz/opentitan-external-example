@@ -8,42 +8,49 @@ pub struct Digest<const N: usize> {
     pub value: [u32; N],
 }
 
-pub trait DigestAlgorithm {
+pub trait DigestAlgorithm: Copy+Debug {
     const OUTPUT_BITS: usize;
     type Digest;
 }
 
+#[derive(Clone, Copy, Debug)]
 pub struct Sha2_256;
 impl DigestAlgorithm for Sha2_256 {
     const OUTPUT_BITS: usize = 256usize;
     type Digest = Digest<{Self::OUTPUT_BITS / 32}>;
 }
+#[derive(Clone, Copy, Debug)]
 pub struct Sha2_384;
 impl DigestAlgorithm for Sha2_384 {
     const OUTPUT_BITS: usize = 384usize;
     type Digest = Digest<{Self::OUTPUT_BITS / 32}>;
 }
+#[derive(Clone, Copy, Debug)]
 pub struct Sha2_512;
 impl DigestAlgorithm for Sha2_512 {
     const OUTPUT_BITS: usize = 512;
     type Digest = Digest<{Self::OUTPUT_BITS / 32}>;
 }
 
+#[derive(Clone, Copy, Debug)]
 pub struct Sha3_224;
 impl DigestAlgorithm for Sha3_224 {
     const OUTPUT_BITS: usize = 224usize;
     type Digest = Digest<{Self::OUTPUT_BITS / 32}>;
 }
+#[derive(Clone, Copy, Debug)]
 pub struct Sha3_256;
 impl DigestAlgorithm for Sha3_256 {
     const OUTPUT_BITS: usize = 256usize;
     type Digest = Digest<{Self::OUTPUT_BITS / 32}>;
 }
+#[derive(Clone, Copy, Debug)]
 pub struct Sha3_384;
 impl DigestAlgorithm for Sha3_384 {
     const OUTPUT_BITS: usize = 384usize;
     type Digest = Digest<{Self::OUTPUT_BITS / 32}>;
 }
+#[derive(Clone, Copy, Debug)]
 pub struct Sha3_512;
 impl DigestAlgorithm for Sha3_512 {
     const OUTPUT_BITS: usize = 512;
@@ -114,7 +121,8 @@ pub trait ErrorType {
 
 
 pub trait DigestInit<T: DigestAlgorithm> : ErrorType {
-    type OpContext<'a>: DigestOp where Self: 'a;
+    type OpContext<'a>: DigestOp<Output=Self::Output> where Self: 'a;
+    type Output: IntoBytes + Immutable;
 
     /// Init instance of the crypto function with the given context.
     ///
@@ -139,7 +147,7 @@ pub trait DigestCtrlReset: ErrorType {
 
 
 pub trait DigestOp: ErrorType {
-    type Output;
+    type Output: IntoBytes + Immutable;
 
     /// Update state using provided input data.
     ///
