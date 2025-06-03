@@ -34,6 +34,7 @@ rust_binary(
         "//baremetal/base",
         "//baremetal/drivers",
         "//baremetal/traits",
+        "//baremetal/software:crypto",
         "//registers:kmac",
         "@crates_baremetal//:ufmt",
         "@crates_baremetal//:zerocopy",
